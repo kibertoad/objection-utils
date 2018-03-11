@@ -1,0 +1,57 @@
+{
+  "name": "objection-utils",
+  "version": "1.0.0",
+  "description": "Utils for Objection.js ORM.",
+  "main": "objection-utils.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --opts \"./mocha.opts\" tests",
+    "prettier": "prettier --write \"{lib,tests}/**/*.{js,ts}\"",
+    "eslint": "eslint --format codeframe \"lib/**/*.js\" \"tests/**/*.js\""
+  },
+  "author": {
+    "name": "Igor Savin",
+    "email": "kibertoad@gmail.com",
+    "url": "https://github.com/kibertoad"
+  },
+  "contributors": [
+    {
+      "name": "Igor Savin",
+      "email": "kibertoad@gmail.com",
+      "url": "https://github.com/kibertoad"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vincit/objection-find.git"
+  },
+  "keywords": [
+    "objection",
+    "sql",
+    "query"
+  ],
+  "files": [
+    "README.md",
+    "LICENSE",
+    "index.js",
+    "lib/*"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.18.2",
+    "eslint-plugin-prettier": "^2.6.0",
+    "knex": "0.14.3",
+    "mocha": "^3.5.3",
+    "nyc": "^11.4.1",
+    "objection": "^1.0.0",
+    "pg": "^7.4.1",
+    "prettier": "^1.11.1",
+    "sqlite3": "^3.1.13"
+  },
+  "peerDependencies": {
+    "objection": ">= 1.0.0"
+  }
+}
