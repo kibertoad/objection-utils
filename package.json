@@ -37,14 +37,15 @@
     "lib/*"
   ],
   "dependencies": {
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.5",
+    "validation-utils": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^4.18.2",
     "eslint-plugin-prettier": "^2.6.0",
     "knex": "0.14.3",
-    "mocha": "^3.5.3",
+    "mocha": "^5.0.4",
     "nyc": "^11.4.1",
     "objection": "^1.0.0",
     "pg": "^7.4.1",
