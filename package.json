@@ -1,6 +1,6 @@
 {
   "name": "objection-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Utils for Objection.js ORM.",
   "main": "objection-utils.js",
   "license": "MIT",
