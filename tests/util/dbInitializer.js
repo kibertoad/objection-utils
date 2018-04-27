@@ -19,6 +19,7 @@ function createDb(knex) {
   return knex.schema.createTableIfNotExists(`models`, function(table) {
     table.increments('id');
     table.string('name');
+    table.string('description');
   });
 }
 

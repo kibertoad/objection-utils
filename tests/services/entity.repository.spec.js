@@ -12,6 +12,10 @@ const TABLE_NAME = 'models';
 
 describe('entity.repository', () => {
   let knex;
+
+  /**
+   * @type EntityRepository
+   */
   let entities;
   before(() => {
     knex = dbInitializer.initialize(dbConfig).knex;
@@ -65,6 +69,21 @@ describe('entity.repository', () => {
       assert.equal(retrievedEntities.length, 1);
       const [entity] = retrievedEntities;
       assert.equal(entity.name, 'updatedName');
+    });
+
+    it('correctly performs incremental update', async () => {
+      const persistedEntity = await entities.create({ name: 'dummyName' });
+
+      await entities.update({
+        id: persistedEntity.id,
+        description: 'desc'
+      });
+
+      const retrievedEntities = await knex(TABLE_NAME).select();
+      assert.equal(retrievedEntities.length, 1);
+      const [entity] = retrievedEntities;
+      assert.equal(entity.name, 'dummyName');
+      assert.equal(entity.description, 'desc');
     });
   });
 

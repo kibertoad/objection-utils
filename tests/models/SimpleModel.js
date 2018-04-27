@@ -14,7 +14,8 @@ class SimpleModel extends ObjectionModel {
 
       properties: {
         id: { type: ['integer'] },
-        name: { type: ['string', 'null'] }
+        name: { type: ['string'] },
+        description: { type: ['string', 'null'] }
       }
     };
   }
