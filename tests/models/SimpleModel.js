@@ -13,6 +13,7 @@ class SimpleModel extends ObjectionModel {
       additionalProperties: false,
 
       properties: {
+        id: { type: ['integer'] },
         name: { type: ['string', 'null'] }
       }
     };
