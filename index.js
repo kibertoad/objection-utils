@@ -1,3 +1,3 @@
 module.exports = {
-	RepositoryFactory: require('./lib/services/repository.factory')
+  repositoryFactory: require('./lib/services/repository.factory')
 };
