@@ -45,6 +45,11 @@ describe('entity.repository', () => {
         name: 'dummyName'
       });
     });
+
+    it('creates from undefined', () => {
+      const entity = entities.fromJson();
+      assert.deepEqual(entity, {});
+    });
   });
 
   describe('create', () => {
@@ -116,4 +121,18 @@ describe('entity.repository', () => {
       assert.equal(entity.name, 'dummyName');
     });
   });
+
+  function sortByName(entityA, entityB) {
+    const nameA = entityA.name.toUpperCase(); // ignore upper and lowercase
+    const nameB = entityB.name.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  }
 });
