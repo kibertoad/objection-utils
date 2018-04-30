@@ -6,6 +6,7 @@ Repositories
 ---------------
 
 Repositories are wrappers around specific DB connection and Objectino.js Model that expose a number of methods to perform CRUD operations:
+NOTE: repositories in objection-utils are deprecated, use dedicated "objection-repositories" library instead.
 
 **Create new entity without persisting
 
