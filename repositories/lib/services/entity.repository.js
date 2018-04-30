@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const validationUtils = require('validation-utils');
+const NotFoundError = require('../errors/NotFoundError');
 
 class EntityRepository {
   /**
@@ -50,14 +51,19 @@ class EntityRepository {
    * @param {Object} [trx] - knex transaction instance. If not specified, new implicit transaction will be used.
    * @returns {integer} number of affected rows
    */
-  update(entity, trx) {
+  async update(entity, trx) {
     //Keep the input parameter immutable
     const entityDto = _.cloneDeep(entity);
     //ToDo implement pre-persistence hooks
-    return this.model
+    const modifiedEntitiesCount = await this.model
       .query(trx || this.knex)
       .update(entityDto)
       .where(this.idColumn, entityDto[this.idColumn]);
+
+    if (modifiedEntitiesCount === 0) {
+      throw new NotFoundError(entityDto[this.idColumn]);
+    }
+    return modifiedEntitiesCount;
   }
 
   /**

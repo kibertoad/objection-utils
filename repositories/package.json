@@ -1,6 +1,6 @@
 {
   "name": "objection-repositories",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Entity repositories for Objection.js ORM.",
   "license": "MIT",
   "scripts": {
@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^4.19.1",
     "eslint-plugin-prettier": "^2.6.0",
     "knex": "0.14.6",

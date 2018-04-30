@@ -6,7 +6,11 @@ const EntityRepository = require('../../lib/services/entity.repository');
 const dbInitializer = require('../util/dbInitializer');
 const dbConfig = require('../util/TestDatabaseConfigs').POSTGRESQL_CONFIG;
 
-const assert = require('chai').assert;
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+
+const { assert, expect } = chai;
 
 const TABLE_NAME = 'models';
 
@@ -23,7 +27,7 @@ describe('entity.repository', () => {
     return dbInitializer.createDb(knex);
   });
   beforeEach(() => {
-    dbInitializer.cleanDb(knex);
+    return dbInitializer.cleanDb(knex);
   });
 
   after(async () => {
@@ -74,6 +78,18 @@ describe('entity.repository', () => {
       assert.equal(retrievedEntities.length, 1);
       const [entity] = retrievedEntities;
       assert.equal(entity.name, 'updatedName');
+    });
+
+    it('throws an error if entity was not found', async () => {
+      await expect(
+        entities.update({
+          id: -1,
+          name: 'updatedName'
+        })
+      ).to.be.rejectedWith(/Entity with id -1 does not exist/);
+
+      const retrievedEntities = await knex(TABLE_NAME).select();
+      assert.equal(retrievedEntities.length, 0);
     });
 
     it('correctly performs incremental update', async () => {
