@@ -1,8 +1,7 @@
 {
-  "name": "objection-utils",
+  "name": "objection-repositories",
   "version": "1.0.5",
-  "description": "Utils for Objection.js ORM.",
-  "main": "objection-utils.js",
+  "description": "Entity repositories for Objection.js ORM.",
   "license": "MIT",
   "scripts": {
     "test": "mocha --opts \"./mocha.opts\" tests/**/*.spec.js",
@@ -27,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/vincit/objection-find.git"
+    "url": "git://github.com/kibertoad/objection-utils.git"
   },
   "keywords": [
     "objection",

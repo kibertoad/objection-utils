@@ -5,7 +5,9 @@ const POSTGRESQL_CONFIG = Object.freeze({
   client: 'postgres',
   connection: {
     host: '127.0.0.1',
-    database: 'objection_utils_test'
+    database: 'objection_utils_test',
+    user: 'postgres',
+    password: 'pass'
   },
   pool: {
     min: 0,
