@@ -17,7 +17,7 @@ Repositories are wrappers around specific DB connection and Objectino.js Model t
   fromJson(attributeValues) {
 ```
 
-**Persist new entity or an array of entities non-recursively (without relations).
+**Persist new entity or an array of entities non-recursively (without relations). Note that batch insert only works on PostgreSQL
 
 ```js
   /**
