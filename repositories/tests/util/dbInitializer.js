@@ -4,11 +4,7 @@ const { dbCleaner } = require('knex-utils');
 const DEFAULT_TABLES = ['models'];
 
 function initialize(knexConfig) {
-  const knex = Knex(knexConfig);
-  return {
-    config: knexConfig,
-    knex: knex
-  };
+  return Knex(knexConfig);
 }
 
 function dropDb(knex) {

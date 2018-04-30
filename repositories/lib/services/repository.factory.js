@@ -13,7 +13,9 @@ function _getRepository(knex, entityModel) {
 }
 
 const memoizedGetRepository = _.memoize(_getRepository, (knex, entityModel) => {
-  return `${knex.config.connection.host}/${knex.config.connection.database}/${entityModel.name}`;
+  return `${knex.client.config.connection.host}/${knex.client.config.connection.database}/${
+    entityModel.name
+  }`;
 });
 
 /**

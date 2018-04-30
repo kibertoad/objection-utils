@@ -18,7 +18,7 @@ describe('entity.repository', () => {
    */
   let entities;
   before(() => {
-    knex = dbInitializer.initialize(dbConfig).knex;
+    knex = dbInitializer.initialize(dbConfig);
     entities = new EntityRepository(knex, SimpleModel);
     return dbInitializer.createDb(knex);
   });
