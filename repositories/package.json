@@ -1,6 +1,6 @@
 {
   "name": "objection-repositories",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "Entity repositories for Objection.js ORM.",
   "license": "MIT",
   "scripts": {

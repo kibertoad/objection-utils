@@ -9,7 +9,7 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {Object} [attributeValues] - attributes of a new entity
    * @returns {Object} entity instance of a repository Model
    */
-  fromJson(attributeValues) {
+  fromJson(attributeValues)
 ```
 
 **Persist new entity or an array of entities non-recursively (without relations). Note that batch insert only works on PostgreSQL
@@ -20,7 +20,7 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {Object} [trx] - knex transaction instance. If not specified, new implicit transaction will be used.
    * @returns {Promise<Object>} - created entity
    */
-  create(instance, trx) {
+  create(instance, trx)
 ```
 
 **Persist updated entity. If previously set fields are not present, performs an incremental update (does not remove fields unless explicitly set to null)
@@ -31,7 +31,7 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {Object} [trx] - knex transaction instance. If not specified, new implicit transaction will be used.
    * @returns {integer} number of affected rows
    */
-  update(entity, trx) {
+  update(entity, trx)
 ```
 
 **Find list of entities with specified attributes
@@ -42,7 +42,19 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
    * @returns {Promise<Object[]>} - search result
    */
-  find(attributeValues = {}, withRelations) {
+  find(attributeValues = {}, withRelations)
+```
+
+**Find list of entities with specified attributes (any of multiple specified values)
+
+```js
+  /**
+   * @param {string} attributeName - attribute name
+   * @param {*[]} attributeValues - attribute values to filter retrieved entities by
+   * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
+   * @returns {Promise<Object[]>}
+   */
+  findWhereIn(attributeName, attributeValues, withRelations)
 ```
 
 **Find first entity with specified attributes
@@ -53,7 +65,7 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
    * @returns {Promise<Object>}
    */
-  findOne(attributeValues = {}, withRelations) {
+  findOne(attributeValues = {}, withRelations)
 ```
 
 

@@ -124,6 +124,21 @@ describe('entity.repository', () => {
     });
   });
 
+  describe('findWhereIn', () => {
+    it('happy path', async () => {
+      await entities.create({ name: 'dummyName1' });
+      await entities.create({ name: 'dummyName2' });
+      await entities.create({ name: 'dummyName3' });
+
+      const retrievedEntities = await entities.findWhereIn('name', ['dummyName1', 'dummyName3']);
+
+      assert.equal(retrievedEntities.length, 2);
+      const [entity1, entity2] = retrievedEntities.sort(sortByName);
+      assert.equal(entity1.name, 'dummyName1');
+      assert.equal(entity2.name, 'dummyName3');
+    });
+  });
+
   describe('findOne', () => {
     it('happy path', async () => {
       await entities.create({ name: 'dummyName' });

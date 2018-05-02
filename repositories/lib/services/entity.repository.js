@@ -86,6 +86,26 @@ class EntityRepository {
   }
 
   /**
+   * Finds list of entities with specified attributes (any of multiple specified values)
+   *
+   * @param {string} attributeName - attribute name
+   * @param {*[]} attributeValues - attribute values to filter retrieved entities by
+   * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
+   * @returns {Promise<Object[]>}
+   */
+  findWhereIn(attributeName, attributeValues, withRelations) {
+    if (_.isArray(withRelations)) {
+      withRelations = `[${_.join(withRelations)}]`;
+    }
+
+    return this.model
+      .query(this.knex)
+      .whereIn(attributeName, attributeValues)
+      .eager(withRelations);
+    //ToDo implement post-retrieval hooks
+  }
+
+  /**
    * Finds first entity by given parameters
    *
    * @param {Object} attributeValues - values to filter retrieved entities by
