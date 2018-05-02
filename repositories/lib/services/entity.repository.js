@@ -35,7 +35,7 @@ class EntityRepository {
    *
    * @param {Object} entity - model instance or parameters for a new entity
    * @param {Object} [trx] - knex transaction instance. If not specified, new implicit transaction will be used.
-   * @returns {Promise<Object>} - created entity
+   * @returns {PromiseLike<Object>} - query builder. You can chain additional methods to it or call "await" or then() on it to execute
    */
   create(entity, trx) {
     //Keep the input parameter immutable
@@ -49,7 +49,7 @@ class EntityRepository {
    *
    * @param {Object} entity - single entity instance
    * @param {Object} [trx] - knex transaction instance. If not specified, new implicit transaction will be used.
-   * @returns {integer} number of affected rows
+   * @returns {PromiseLike<integer>} number of affected rows
    */
   async update(entity, trx) {
     //Keep the input parameter immutable
@@ -71,7 +71,7 @@ class EntityRepository {
    *
    * @param {Object} attributeValues - values to filter retrieved entities by
    * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
-   * @returns {Promise<Object[]>}
+   * @returns {PromiseLike<Object[]>} - query builder. You can chain additional methods to it or call "await" or then() on it to execute
    */
   find(attributeValues = {}, withRelations) {
     if (_.isArray(withRelations)) {
@@ -91,7 +91,7 @@ class EntityRepository {
    * @param {string} attributeName - attribute name
    * @param {*[]} attributeValues - attribute values to filter retrieved entities by
    * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
-   * @returns {Promise<Object[]>}
+   * @returns {PromiseLike<Object[]>} - query builder. You can chain additional methods to it or call "await" or then() on it to execute
    */
   findWhereIn(attributeName, attributeValues, withRelations) {
     if (_.isArray(withRelations)) {

@@ -92,5 +92,18 @@ module.exports = {
 	 */
 	anotherEntityRepository
 };
-
 ```
+
+** Extending repositories with custom logic
+
+You can extend base EntityRepository class and pass it as a parameter to the factory to have custom methods in your repositories:
+
+```js
+class CustomRepository extends EntityRepository {
+  // custom logic
+}
+
+const someEntityRepository = repositoryFactory.getCustomRepository(CustomRepository, knex, SomeEntityModel);
+```
+
+Note that all constructions arguments will be passed to your custom class verbatim (starting with the second argument).
