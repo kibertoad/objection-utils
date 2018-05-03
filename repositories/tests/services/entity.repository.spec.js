@@ -137,6 +137,49 @@ describe('entity.repository', () => {
       assert.equal(entity1.name, 'dummyName1');
       assert.equal(entity2.name, 'dummyName3');
     });
+
+    it('object param structure', async () => {
+      await entities.create({ name: 'dummyName1' });
+      await entities.create({ name: 'dummyName2' });
+      await entities.create({ name: 'dummyName3' });
+
+      const retrievedEntities = await entities.findWhereIn({ name: ['dummyName1', 'dummyName3'] });
+
+      assert.equal(retrievedEntities.length, 2);
+      const [entity1, entity2] = retrievedEntities.sort(sortByName);
+      assert.equal(entity1.name, 'dummyName1');
+      assert.equal(entity2.name, 'dummyName3');
+    });
+
+    it('object multi-param structure', async () => {
+      await entities.create({ name: 'dummyName1', surname: 'dummySurname0' });
+      await entities.create({ name: 'dummyName2', surname: 'dummySurname0' });
+      await entities.create({ name: 'dummyName3', surname: 'dummySurname1' });
+
+      const retrievedEntities = await entities.findWhereIn({
+        name: ['dummyName1', 'dummyName3'],
+        surname: ['dummySurname2', 'dummySurname0']
+      });
+
+      assert.equal(retrievedEntities.length, 1);
+      const [entity1] = retrievedEntities.sort(sortByName);
+      assert.equal(entity1.name, 'dummyName1');
+    });
+
+    it('object structure with single value', async () => {
+      await entities.create({ name: 'dummyName1', surname: 'dummySurname0' });
+      await entities.create({ name: 'dummyName2', surname: 'dummySurname0' });
+      await entities.create({ name: 'dummyName3', surname: 'dummySurname1' });
+
+      const retrievedEntities = await entities.findWhereIn({
+        name: 'dummyName2',
+        surname: ['dummySurname0']
+      });
+
+      assert.equal(retrievedEntities.length, 1);
+      const [entity1] = retrievedEntities.sort(sortByName);
+      assert.equal(entity1.name, 'dummyName2');
+    });
   });
 
   describe('findOne', () => {

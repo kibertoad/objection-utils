@@ -87,21 +87,34 @@ class EntityRepository {
 
   /**
    * Finds list of entities with specified attributes (any of multiple specified values)
+   * Supports both ('attrName', ['value1', 'value2]) and ({attrName: ['value1', 'value2']} formats)
    *
-   * @param {string} attributeName - attribute name
-   * @param {*[]} attributeValues - attribute values to filter retrieved entities by
+   * @param {string|Object} searchParam - attribute name or search criteria object
+   * @param {*[]} [attributeValues] - attribute values to filter retrieved entities by
    * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
    * @returns {PromiseLike<Object[]>} - query builder. You can chain additional methods to it or call "await" or then() on it to execute
    */
-  findWhereIn(attributeName, attributeValues, withRelations) {
-    if (_.isArray(withRelations)) {
+  findWhereIn(searchParam, attributeValues, withRelations) {
+    if (Array.isArray(withRelations)) {
       withRelations = `[${_.join(withRelations)}]`;
     }
+    if (_.isString(searchParam)) {
+      return this.model
+        .query(this.knex)
+        .whereIn(searchParam, attributeValues)
+        .eager(withRelations);
+    } else {
+      const builder = this.model.query(this.knex).eager(withRelations);
+      _.forOwn(searchParam, (value, key) => {
+        if (Array.isArray(value)) {
+          builder.whereIn(key, value);
+        } else {
+          builder.where(key, value);
+        }
+      });
+      return builder;
+    }
 
-    return this.model
-      .query(this.knex)
-      .whereIn(attributeName, attributeValues)
-      .eager(withRelations);
     //ToDo implement post-retrieval hooks
   }
 

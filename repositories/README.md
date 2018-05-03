@@ -49,12 +49,13 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
 
 ```js
   /**
-   * @param {string} attributeName - attribute name
+   * Supports both ('attrName', ['value1', 'value2]) and ({attrName: ['value1', 'value2']} formats)
+   * @param {string|Object} searchParam - attribute name or search criteria object
    * @param {*[]} attributeValues - attribute values to filter retrieved entities by
    * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
    * @returns {Promise<Object[]>}
    */
-  findWhereIn(attributeName, attributeValues, withRelations)
+  findWhereIn(searchParam, attributeValues, withRelations)
 ```
 
 **Find first entity with specified attributes
