@@ -69,6 +69,16 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
   findOne(attributeValues = {}, withRelations)
 ```
 
+**Delete entities with specified attributes
+
+```js
+  /**
+   * @param {Object} attributeValues - values to filter deleted entities by
+   * @param {Object} [trx]
+   * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
+   */
+  deleteBy(attributeValues, trx) {
+```
 
 Recommended repository initialization and exposal pattern (JSDoc is used to assist with autocompletion):
 
@@ -94,6 +104,9 @@ module.exports = {
 	anotherEntityRepository
 };
 ```
+
+In case you are only instantiating repositories in a single place (and thus don't care about ensuring them to be memoized singletons), you don't
+need to use factory and can instantiate EntityRepository directly.
 
 ** Extending repositories with custom logic
 

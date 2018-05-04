@@ -131,8 +131,8 @@ class EntityRepository {
   }
 
   /**
-   * @param {Object} Model - model type
    * @param {Object} attributeValues - values to filter deleted entities by
+   * @param {Object} [trx]
    * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
    */
   deleteBy(attributeValues, trx) {
