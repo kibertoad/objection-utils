@@ -129,6 +129,18 @@ class EntityRepository {
     const results = await this.find(attributeValues, withRelations);
     return results[0] || null;
   }
+
+  /**
+   * @param {Object} Model - model type
+   * @param {Object} attributeValues - values to filter deleted entities by
+   * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
+   */
+  deleteBy(attributeValues, trx) {
+    return this.model
+      .query(trx || this.knex)
+      .delete()
+      .where(attributeValues);
+  }
 }
 
 //This is only invoked on the startup, so we can make this check non-trivial

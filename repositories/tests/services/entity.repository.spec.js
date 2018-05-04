@@ -196,6 +196,24 @@ describe('entity.repository', () => {
     });
   });
 
+  describe('deleteBy', () => {
+    it('happy path', async () => {
+      await entities.create({ name: 'dummyName' });
+      await entities.create({ name: 'dummyName' });
+      await entities.create({ name: 'testName' });
+
+      const deletedCount = await entities.deleteBy({
+        name: 'dummyName'
+      });
+      assert.equal(deletedCount, 2);
+
+      const retrievedEntities = await knex(TABLE_NAME).select();
+      assert.equal(retrievedEntities.length, 1);
+      const [entity] = retrievedEntities;
+      assert.equal(entity.name, 'testName');
+    });
+  });
+
   function sortByName(entityA, entityB) {
     const nameA = entityA.name.toUpperCase(); // ignore upper and lowercase
     const nameB = entityB.name.toUpperCase(); // ignore upper and lowercase
