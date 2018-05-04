@@ -124,6 +124,24 @@ describe('entity.repository', () => {
     });
   });
 
+  describe('findWhereNot', () => {
+    it('happy path', async () => {
+      await entities.create({ name: 'dummyName', surname: 'test' });
+      await entities.create({ name: 'dummyName', surname: 'dummy' });
+      await entities.create({ name: 'testName', surname: 'dummy' });
+
+      const retrievedEntities = await entities.findWhereNot({
+        name: 'testName',
+        surname: 'dummy'
+      });
+
+      assert.equal(retrievedEntities.length, 1);
+      const [entity] = retrievedEntities;
+      assert.equal(entity.name, 'dummyName');
+      assert.equal(entity.surname, 'test');
+    });
+  });
+
   describe('findWhereIn', () => {
     it('happy path', async () => {
       await entities.create({ name: 'dummyName1' });

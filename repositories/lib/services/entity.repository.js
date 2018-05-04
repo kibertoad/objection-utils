@@ -86,6 +86,25 @@ class EntityRepository {
   }
 
   /**
+   * Finds list of entities with attribute values that are different from specified ones
+   *
+   * @param {Object} attributeValues - values to filter retrieved entities by
+   * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
+   * @returns {PromiseLike<Object[]>} - query builder. You can chain additional methods to it or call "await" or then() on it to execute
+   */
+  findWhereNot(attributeValues = {}, withRelations) {
+    if (_.isArray(withRelations)) {
+      withRelations = `[${_.join(withRelations)}]`;
+    }
+
+    return this.model
+      .query(this.knex)
+      .whereNot(attributeValues)
+      .eager(withRelations);
+    //ToDo implement post-retrieval hooks
+  }
+
+  /**
    * Finds list of entities with specified attributes (any of multiple specified values)
    * Supports both ('attrName', ['value1', 'value2]) and ({attrName: ['value1', 'value2']} formats)
    *

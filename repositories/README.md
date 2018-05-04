@@ -45,6 +45,17 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
   find(attributeValues = {}, withRelations)
 ```
 
+**Find list of entities with attribute values that are different from specified ones
+
+```js
+  /**
+   * @param {Object} attributeValues - values to filter retrieved entities by
+   * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
+   * @returns {PromiseLike<Object[]>} - query builder. You can chain additional methods to it or call "await" or then() on it to execute
+   */
+  findWhereNot(attributeValues = {}, withRelations)
+```
+
 **Find list of entities with specified attributes (any of multiple specified values)
 
 ```js
