@@ -150,6 +150,17 @@ class EntityRepository {
   }
 
   /**
+   * Finds first entity by given parameters
+   *
+   * @param {string || number} id - value of id column of the entity
+   * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
+   * @returns {Promise<Object>}
+   */
+  findOneById(id, withRelations) {
+    return this.findOne({ [this.idColumn]: id }, withRelations);
+  }
+
+  /**
    * @param {Object} attributeValues - values to filter deleted entities by
    * @param {Object} [trx]
    * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
@@ -159,6 +170,15 @@ class EntityRepository {
       .query(trx || this.knex)
       .delete()
       .where(attributeValues);
+  }
+
+  /**
+   * @param {string || number} id - value of id column of the entity
+   * @param {Object} [trx]
+   * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
+   */
+  deleteById(id, trx) {
+    return this.deleteBy({ [this.idColumn]: id }, trx);
   }
 }
 

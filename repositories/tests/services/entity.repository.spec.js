@@ -1,4 +1,5 @@
 const SimpleModel = require('../models/SimpleModel');
+const SimpleModelCustomId = require('../models/SimpleModelCustomId');
 const ExtendedCommonModel = require('../models/ExtendedCommonModel');
 
 const EntityRepository = require('../../lib/services/entity.repository');
@@ -21,9 +22,11 @@ describe('entity.repository', () => {
    * @type EntityRepository
    */
   let entities;
+  let entitiesCustomId;
   before(() => {
     knex = dbInitializer.initialize(dbConfig);
     entities = new EntityRepository(knex, SimpleModel);
+    entitiesCustomId = new EntityRepository(knex, SimpleModelCustomId);
     return dbInitializer.createDb(knex);
   });
   beforeEach(() => {
@@ -214,6 +217,18 @@ describe('entity.repository', () => {
     });
   });
 
+  describe('findOneById', () => {
+    it('happy path', async () => {
+      await entitiesCustomId.create({ name: 'dummyName', code: 'a1' });
+      await entitiesCustomId.create({ name: 'dummyName', code: 'a2' });
+      await entitiesCustomId.create({ name: 'testName', code: 'a3' });
+
+      const entity = await entitiesCustomId.findOneById('a3');
+
+      assert.equal(entity.name, 'testName');
+    });
+  });
+
   describe('deleteBy', () => {
     it('happy path', async () => {
       await entities.create({ name: 'dummyName' });
@@ -229,6 +244,22 @@ describe('entity.repository', () => {
       assert.equal(retrievedEntities.length, 1);
       const [entity] = retrievedEntities;
       assert.equal(entity.name, 'testName');
+    });
+  });
+
+  describe('deleteById', () => {
+    it('happy path', async () => {
+      await entitiesCustomId.create({ name: 'dummyName', code: 'b1' });
+      await entitiesCustomId.create({ name: 'dummyName', code: 'b2' });
+      await entitiesCustomId.create({ name: 'testName', code: 'b3' });
+
+      const deletedCount = await entitiesCustomId.deleteById('b3');
+      assert.equal(deletedCount, 1);
+
+      const retrievedEntities = await knex(TABLE_NAME).select();
+      assert.equal(retrievedEntities.length, 2);
+      const [entity] = retrievedEntities;
+      assert.equal(entity.name, 'dummyName');
     });
   });
 

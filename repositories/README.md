@@ -80,6 +80,17 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
   findOne(attributeValues = {}, withRelations)
 ```
 
+**Find entity with specified id (as defined by idColumn entity attribute)
+
+```js
+  /**
+   * @param {string || number} id - value of id column of the entity
+   * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
+   * @returns {Promise<Object>}
+   */
+  findOneById(id, withRelations) {
+```
+
 **Delete entities with specified attributes
 
 ```js
@@ -89,6 +100,17 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
    */
   deleteBy(attributeValues, trx) {
+```
+
+**Delete entity with specified id (as defined by idColumn entity attribute)
+
+```js
+  /**
+   * @param {string || number} id - value of id column of the entity
+   * @param {Object} [trx]
+   * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
+   */
+  deleteById(id, trx) {
 ```
 
 Recommended repository initialization and exposal pattern (JSDoc is used to assist with autocompletion):
