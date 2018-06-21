@@ -111,6 +111,19 @@ describe('entity.repository', () => {
     });
   });
 
+  describe('updateAndFetch', () => {
+    it('happy path', async () => {
+      const persistedEntity1 = await entitiesCustomId.create({ name: 'dummyName', code: 'a1' });
+      const persistedEntity2 = await entitiesCustomId.create({ name: 'dummyName', code: 'a2' });
+      const updatedEntity = await entitiesCustomId.updateAndFetch({
+        ...persistedEntity1,
+        name: 'updatedName'
+      });
+
+      assert.equal(updatedEntity.name, 'updatedName');
+    });
+  });
+
   describe('find', () => {
     it('happy path', async () => {
       await entities.create({ name: 'dummyName' });

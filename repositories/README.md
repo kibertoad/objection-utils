@@ -34,6 +34,17 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
   update(entity, trx)
 ```
 
+**Persist updated entity. If previously set fields are not present, performs an incremental update (does not remove fields unless explicitly set to null)
+
+```js
+  /**
+   * @param {Object} entity - single entity instance
+   * @param {Object} [trx] - knex transaction instance. If not specified, new implicit transaction will be used.
+   * @returns {PromiseLike<Object>} updatedEntity
+   */
+  updateAndFetch(entity, trx)
+```
+
 **Find list of entities with specified attributes
 
 ```js
@@ -88,7 +99,7 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {string || string[]} [withRelations] - name of relation(s) to eagerly retrieve, as defined in model relationMappings()
    * @returns {Promise<Object>}
    */
-  findOneById(id, withRelations) {
+  findOneById(id, withRelations)
 ```
 
 **Delete entities with specified attributes
@@ -99,7 +110,7 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {Object} [trx]
    * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
    */
-  deleteBy(attributeValues, trx) {
+  deleteBy(attributeValues, trx)
 ```
 
 **Delete entity with specified id (as defined by idColumn entity attribute)
@@ -110,7 +121,7 @@ Repositories are wrappers around specific DB connection and Objection.js Model t
    * @param {Object} [trx]
    * @returns {PromiseLike<integer>} Query builder. After promise is resolved, returns count of deleted rows
    */
-  deleteById(id, trx) {
+  deleteById(id, trx)
 ```
 
 Recommended repository initialization and exposal pattern (JSDoc is used to assist with autocompletion):

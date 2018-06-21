@@ -67,6 +67,22 @@ class EntityRepository {
   }
 
   /**
+   * Persists updated entity. If previously set fields are not present, performs an incremental update (does not remove fields unless explicitly set to null)
+   *
+   * @param {Object} entity - single entity instance
+   * @param {Object} [trx] - knex transaction instance. If not specified, new implicit transaction will be used.
+   * @returns {PromiseLike<Object>} updatedEntity
+   */
+  updateAndFetch(entity, trx) {
+    //Keep the input parameter immutable
+    const entityDto = _.cloneDeep(entity);
+    //ToDo implement pre-persistence hooks
+    return this.model
+      .query(trx || this.knex)
+      .updateAndFetchById(entityDto[this.idColumn], entityDto);
+  }
+
+  /**
    * Finds list of entities with specified attributes
    *
    * @param {Object} attributeValues - values to filter retrieved entities by
