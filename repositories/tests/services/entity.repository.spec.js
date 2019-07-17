@@ -1,6 +1,7 @@
 const SimpleModel = require('../models/SimpleModel');
 const SimpleModelCustomId = require('../models/SimpleModelCustomId');
 const ExtendedCommonModel = require('../models/ExtendedCommonModel');
+const CompositeKeyModel = require('../models/CompositeKeyModel');
 
 const EntityRepository = require('../../lib/services/entity.repository');
 
@@ -23,10 +24,12 @@ describe('entity.repository', () => {
    */
   let entities;
   let entitiesCustomId;
+  let compositeEntities;
   before(() => {
     knex = dbInitializer.initialize(dbConfig);
     entities = new EntityRepository(knex, SimpleModel);
     entitiesCustomId = new EntityRepository(knex, SimpleModelCustomId);
+    compositeEntities = new EntityRepository(knex, CompositeKeyModel);
     return dbInitializer.createDb(knex);
   });
   beforeEach(() => {
@@ -108,6 +111,19 @@ describe('entity.repository', () => {
       const [entity] = retrievedEntities;
       assert.equal(entity.name, 'dummyName');
       assert.equal(entity.description, 'desc');
+    });
+
+    it('supports models with composite keys', async () => {
+      const persistedEntity = await compositeEntities.create({ name: 'name', code: 'code' });
+      await compositeEntities.update({
+        ...persistedEntity,
+        description: 'updatedDescription'
+      });
+
+      const retrievedEntities = await knex(TABLE_NAME).select();
+      assert.equal(retrievedEntities.length, 1);
+      const [entity] = retrievedEntities;
+      assert.equal(entity.description, 'updatedDescription');
     });
   });
 
