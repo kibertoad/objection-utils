@@ -58,11 +58,11 @@ class EntityRepository {
     const identityClause = {};
 
     if (Array.isArray(this.idColumn)) {
-      this.idColumn.forEach((idColumn) => identityClause[idColumn] = entityDto[idColumn]);
+      this.idColumn.forEach((idColumn) => (identityClause[idColumn] = entityDto[idColumn]));
     } else {
       identityClause[this.idColumn] = entityDto[this.idColumn];
     }
-    
+
     //ToDo implement pre-persistence hooks
     const modifiedEntitiesCount = await this.model
       .query(trx || this.knex)

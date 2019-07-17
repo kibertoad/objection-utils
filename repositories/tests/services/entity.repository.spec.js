@@ -112,18 +112,18 @@ describe('entity.repository', () => {
       assert.equal(entity.name, 'dummyName');
       assert.equal(entity.description, 'desc');
     });
-    
-    it('supports models with composite keys', async () => {
-        const persistedEntity = await compositeEntities.create({ name: 'name', code: 'code' });
-        await compositeEntities.update({
-            ...persistedEntity,
-            description: 'updatedDescription'
-        });
 
-        const retrievedEntities = await knex(TABLE_NAME).select();
-        assert.equal(retrievedEntities.length, 1);
-        const [entity] = retrievedEntities;
-        assert.equal(entity.description, 'updatedDescription');
+    it('supports models with composite keys', async () => {
+      const persistedEntity = await compositeEntities.create({ name: 'name', code: 'code' });
+      await compositeEntities.update({
+        ...persistedEntity,
+        description: 'updatedDescription'
+      });
+
+      const retrievedEntities = await knex(TABLE_NAME).select();
+      assert.equal(retrievedEntities.length, 1);
+      const [entity] = retrievedEntities;
+      assert.equal(entity.description, 'updatedDescription');
     });
   });
 
