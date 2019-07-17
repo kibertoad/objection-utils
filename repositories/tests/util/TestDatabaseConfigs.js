@@ -23,7 +23,27 @@ const SQLITE_CONFIG = Object.freeze({
   useNullAsDefault: true
 });
 
+const DB_CONFIG_MAP = Object.freeze({
+  sqlite: SQLITE_CONFIG,
+  postgres: POSTGRESQL_CONFIG
+});
+
+function getDbConfig() {
+  const db = process.env.TEST_DB;
+  if (!db) {
+    throw new Error('Env variable TEST_DB is not set');
+  }
+
+  const dbConfig = DB_CONFIG_MAP[db];
+  if (!dbConfig) {
+    throw new Error(`Unknown DB: ${db}`);
+  }
+
+  return dbConfig;
+}
+
 module.exports = {
   POSTGRESQL_CONFIG,
-  SQLITE_CONFIG
+  SQLITE_CONFIG,
+  getDbConfig
 };

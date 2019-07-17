@@ -4,7 +4,8 @@
   "description": "Entity repositories for Objection.js ORM.",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --opts \"./mocha.opts\" tests/**/*.spec.js",
+    "test": " cross-env TEST_DB=postgres mocha --opts \"./mocha.opts\" tests/**/*.spec.js",
+    "test:sqlite": "cross-env TEST_DB=sqlite mocha --opts \"./mocha.opts\" tests/**/*.spec.js",
     "prettier": "prettier --write \"{lib,tests}/**/*.{js,ts}\"",
     "eslint": "eslint --format codeframe \"lib/**/*.js\" \"tests/**/*.js\""
   },
@@ -46,6 +47,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "cross-env": "^5.2.0",
     "eslint": "^6.0.1",
     "eslint-plugin-prettier": "^3.1.0",
     "knex": "0.19.0",

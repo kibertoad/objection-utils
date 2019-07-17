@@ -5,7 +5,7 @@ const ExtendedCommonModel = require('../models/ExtendedCommonModel');
 const EntityRepository = require('../../lib/services/entity.repository');
 
 const dbInitializer = require('../util/dbInitializer');
-const dbConfig = require('../util/TestDatabaseConfigs').POSTGRESQL_CONFIG;
+const dbConfig = require('../util/TestDatabaseConfigs').getDbConfig();
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
