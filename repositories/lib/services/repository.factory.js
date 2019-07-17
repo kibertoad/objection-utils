@@ -20,9 +20,7 @@ function _getRepository(knex, entityModel) {
 }
 
 const memoizedGetRepository = _.memoize(_getRepository, (knex, entityModel) => {
-  return `${knex.client.config.connection.host}/${knex.client.config.connection.database}/${
-    entityModel.name
-  }`;
+  return `${knex.client.config.connection.host}/${knex.client.config.connection.database}/${entityModel.name}`;
 });
 
 /**
@@ -57,9 +55,7 @@ function _getArgumentsExceptFirst(args) {
 const memoizedGetCustomRepository = _.memoize(
   _getCustomRepository,
   (RepositoryClass, knex, entityModel) => {
-    return `${knex.client.config.connection.host}/${knex.client.config.connection.database}/${
-      entityModel.name
-    }`;
+    return `${knex.client.config.connection.host}/${knex.client.config.connection.database}/${entityModel.name}`;
   }
 );
 

@@ -5,7 +5,7 @@ const repositoryFactory = require('../../lib/services/repository.factory');
 const EntityRepository = require('../../lib/services/entity.repository');
 
 const dbInitializer = require('../util/dbInitializer');
-const dbConfig = require('../util/TestDatabaseConfigs').POSTGRESQL_CONFIG;
+const dbConfig = require('../util/TestDatabaseConfigs').getDbConfig();
 
 const assert = require('chai').assert;
 
