@@ -54,6 +54,15 @@ class EntityRepository {
   async update(entity, trx) {
     //Keep the input parameter immutable
     const entityDto = _.cloneDeep(entity);
+
+    const identityClause = {};
+
+    if (_.isArray(this.idColumn)) {
+      this.idColumn.forEach((idColumn) => identityClause[idColumn] = entityDto[idColumn])
+    } else {
+      identityClause[this.idColumn] = entityDto[this.idColumn]
+    }
+    
     //ToDo implement pre-persistence hooks
     const modifiedEntitiesCount = await this.model
       .query(trx || this.knex)
