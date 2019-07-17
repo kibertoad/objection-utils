@@ -67,7 +67,7 @@ class EntityRepository {
     const modifiedEntitiesCount = await this.model
       .query(trx || this.knex)
       .update(entityDto)
-      .where(this.idColumn, entityDto[this.idColumn]);
+      .where(identityClause);
 
     if (modifiedEntitiesCount === 0) {
       throw new NotFoundError(entityDto[this.idColumn]);
