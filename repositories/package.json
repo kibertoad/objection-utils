@@ -1,11 +1,12 @@
 {
   "name": "objection-repositories",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Entity repositories for Objection.js ORM.",
   "license": "MIT",
   "scripts": {
     "test": " cross-env TEST_DB=postgres mocha --opts \"./mocha.opts\" tests/**/*.spec.js",
     "test:sqlite": "cross-env TEST_DB=sqlite mocha --opts \"./mocha.opts\" tests/**/*.spec.js",
+    "test:ci": "npm run eslint && npm run test && npm run test:sqlite",
     "prettier": "prettier --write \"{lib,tests}/**/*.{js,ts}\"",
     "eslint": "eslint --format codeframe \"lib/**/*.js\" \"tests/**/*.js\""
   },
@@ -41,23 +42,23 @@
     "lib/*"
   ],
   "dependencies": {
-    "lodash": "^4.17.14",
-    "validation-utils": "^2.8.1"
+    "lodash": "^4.17.15",
+    "validation-utils": "^4.0.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "cross-env": "^5.2.0",
-    "eslint": "^6.0.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "knex": "0.19.0",
-    "mocha": "^6.1.4",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.5.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "knex": "0.19.5",
+    "mocha": "^6.2.2",
     "nyc": "^14.1.1",
-    "objection": "^1.6.9",
-    "pg": "^7.11.0",
+    "objection": "^1.6.11",
+    "pg": "^7.12.1",
     "prettier": "^1.18.2",
-    "sqlite3": "^4.0.9",
-    "knex-utils": "^4.1.5"
+    "sqlite3": "^4.1.0",
+    "knex-utils": "^4.1.6"
   },
   "peerDependencies": {
     "objection": ">= 1.0.0"
