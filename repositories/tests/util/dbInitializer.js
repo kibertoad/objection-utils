@@ -12,12 +12,17 @@ function dropDb(knex) {
 }
 
 function createDb(knex) {
-  return knex.schema.createTableIfNotExists(`models`, function(table) {
-    table.increments('id');
-    table.string('name');
-    table.string('code');
-    table.string('surname');
-    table.string('description');
+  return knex.schema.hasTable('models').then((tableExists) => {
+    if (tableExists) {
+      return;
+    }
+    return knex.schema.createTable('models', (table) => {
+      table.increments('id');
+      table.string('name');
+      table.string('code');
+      table.string('surname');
+      table.string('description');
+    });
   });
 }
 

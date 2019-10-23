@@ -10,3 +10,6 @@ script:
 
 notifications:
   email: true
+
+addons:
+  postgresql: '11.2'
