@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const validate = require('validation-utils');
+const validate = require('validation-utils').validationHelper;
 
 const EntityRepository = require('./entity.repository');
 

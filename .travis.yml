@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - '8'
+  - '10'
+  - '12'
+
+script:
+  - npm run-script test:ci
+
+notifications:
+  email: true
+
+before_script:
+  - psql -c 'create database objection_utils_test;' -U postgres
+
+services:
+  - postgresql

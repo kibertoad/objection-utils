@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const validationUtils = require('validation-utils');
+const validationUtils = require('validation-utils').validationHelper;
 const NotFoundError = require('../errors/NotFoundError');
 
 class EntityRepository {

@@ -1,0 +1,12 @@
+{
+  "name": "objection-utils",
+  "version": "1.0.0",
+  "scripts": {
+    "test:repositories": "cd repositories && npm install && npm run test:ci",
+    "test:ci": "npm run test:repositories"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

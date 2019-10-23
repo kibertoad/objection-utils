@@ -11,7 +11,6 @@ const assert = require('chai').assert;
 
 describe('repository.factory', () => {
   let knex;
-  let entities;
   before(() => {
     knex = dbInitializer.initialize(dbConfig);
   });
