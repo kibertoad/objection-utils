@@ -11,5 +11,8 @@ script:
 notifications:
   email: true
 
-addons:
-  postgresql: '11.2'
+before_script:
+  - psql -c 'create database objection_utils_test;' -U postgres
+
+services:
+  - postgresql
